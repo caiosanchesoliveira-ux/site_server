@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Orbitron&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+  --preto-tunica: #070708;
+  --cinza-metal: #1d2024;
+  --cinza-palido: #e5e9ec;
+  
+  --azul-raios: #4d00ff;
+  --vermelho-sabre: #ff001f;
+  --vermelho-bordeaux: #800014;
+}
+
+body{
+    background-image: 
+        linear-gradient(
+            to right,
+            rgba(0,0,0,0.7) 0%,
+            rgba(0,0,0,0.1) 40%,
+            rgba(0,0,0,0.1) 90%
+        ),
+        url("sala-morte.webp");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    position: relative;
+    margin: 0;
+}
+
+.personagem{
+    position: absolute;
+    max-height: 62vh;
+    right: 570px;
+    bottom: 0;
+    filter: brightness(0.7) saturate(0.7);
+    transition: filter 0.3s ease;
+}
+
+.personagem:hover{
+    filter: brightness(1.5) saturate(1.5);
+}
+
+.menu{
+    position: sticky;
+    top: 0;
+    padding: 20px; 
+    text-align: center;
+    z-index: 100;
+    opacity: 0.5;
+    transition: .3s;
+}
+
+.menu:hover{
+    opacity: 1;
+}
+
+
+.link{
+    color: var(--cinza-palido);
+    text-decoration: none;
+    font-family: "Cinzel";
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin: 0 20px;
+    transition: .3s;
+}
+
+.link:hover{
+    color: var(--vermelho-sabre); 
+    text-shadow: 0 0 10px var(--azul-raios); 
+}
+
+.container{
+    max-width: 415px;
+    width: 90%;
+    height: auto;
+    margin-top: 40px;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: "Cinzel";  
+    color: var(--azul-raios)
+}
+
+.paragrafo{
+    text-align: justify;
+    color: var(--cinza-palido);
+}
+
+.titulo{
+    color: var(--vermelho-sabre);
+}
+
+ul{
+    color: var(--cinza-palido)
+}
+
+
+

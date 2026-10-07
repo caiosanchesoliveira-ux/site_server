@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+   --fundo-cinema:  #0b0b0d; /* escuro estilo cinema */
+
+    --fundo-card: #1e1e24; /*Cinza escuro geek */
+
+    --amarelo-starwars: #ffe81f; /* laranja padrão de quadrinhos */
+
+    --brilho: #01afff; /* para mudar de cor  */
+    
+    --red: #da1010; /* vermelho para destaque */
+
+}
+
+body{
+    background-image: url("espaço3.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.menu{
+    position: sticky;
+    top: 1;
+    padding: 20px; 
+    text-align: center;
+    z-index: 100;
+    opacity: 0.8;
+}
+
+.link{
+    color: var(--amarelo-starwars);
+    text-decoration: none;
+    font-family: 'bangers';
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin: 0 20px;
+
+    transition: .5s;
+}
+
+.link:hover{
+    color: var(--red);
+    text-shadow: 0 0 5px var(--red);
+}
+
+
+footer{
+  text-align: center;
+  color: var(--amarelo-starwars);
+}
+
+.container{
+    max-width: 550px;
+    margin: 20px auto;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    background-color:var(--fundo-cinema);
+    border-radius: 11px;
+    border: 3px solid var(--red); 
+    overflow: hidden;
+    
+}
+
+.container-mensagem{
+    flex: 1;
+    padding: 20px;
+    background-size: cover;
+    text-align: center;
+    margin: 0 auto;
+    
+}
+
+.mensagem{
+    color: white;
+    max-width: 75%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    border: 3px solid var(--red)
+}
+
+.mensagem.usuario{
+    background-color:var(--fundo-card);
+    color: var(--red);
+    align-self: flex-end;
+}
+
+.formulario{
+    display: flex;
+    padding: 15px;
+    background-color: var(--fundo-card);
+    gap: 10px;
+}
+
+.formulario input{
+    flex: 1;
+    padding: 12px;
+    background-color: var(--fundo-card);
+    border: 1px solid var(--fundo-cinema);
+    border-radius: 8px;
+    color: white;
+    outline: none;
+}
+
+
+.formulario button{
+    padding: 0 20px;
+    background-color:var(--red);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.formulario button:hover {
+    background-color:var(--fundo-cinema);
+    filter: drop-shadow(0 0 10px var(--red));
+}

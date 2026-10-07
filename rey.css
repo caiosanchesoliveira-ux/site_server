@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Orbitron&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    --texto-claro: #ECEFF1;
+
+    --areia-vestes: #D7CCC8;
+
+     --brilho-sabre: #FFF59D;
+
+     --ouro-jedi: #E5C158;
+
+      --cinza-metal: #2B3036;
+}
+
+body{
+    background-image: 
+         linear-gradient(
+            to right,
+            rgba(0,0,0) 0%,
+            rgba(0,0,0,0.6) 40%,
+            rgba(0,0,0,0.1) 90%
+        ),
+        url("estrela-morte.webp");
+
+    background-size: 
+        cover,
+        cover;
+    
+    background-position: 
+        center,
+        center;
+        
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    position: relative;
+    margin: 0;
+
+
+}
+
+.personagem{
+    max-height: 72vh;
+    position: absolute;
+    right: 15%;
+    bottom: 0;
+    filter: brightness(0.8);
+    transform: scaleX(-1);
+    transition: filter .5s ease, transform .3s;
+}
+
+.personagem:hover{
+    filter: brightness(1.1);
+    transform: scaleX(-1)
+}
+
+.menu{
+    position: sticky;
+    top: 0;
+    padding: 20px; 
+    text-align: center;
+    z-index: 100;
+    opacity: 0.7;
+    transition: .3s;
+}
+
+.menu:hover{
+    opacity: 1;
+}
+
+
+.link{
+    color: var(--areia-vestes);
+    text-decoration: none;
+    font-family: "Cinzel";
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin: 0 20px;
+    transition: .3s;
+}
+
+.link:hover{
+    color: var(--ouro-jedi);  
+    text-shadow: 0px 0px 10px var(--ouro-jedi);
+}
+
+.container{
+    max-width: 415px;
+    width: 90%;
+    height: auto;
+    margin-top: 40px;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: "Cinzel";  
+    color: var(--ouro-jedi)
+}
+
+.paragrafo{
+    color: var(--areia-vestes);
+    text-align: justify;
+}
+
+
+
+.titulo{
+    color: var(--brilho-sabre)
+}
+
+.lista{
+    color: var(--areia-vestes);
+    margin: auto
+}

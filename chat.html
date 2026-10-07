@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+    <nav class="menu">
+        <a class="link" href="index.html">Home</a>
+        <a class="link" href="card.html">Cards</a>
+        <a class="link" href="chat.html">Chat</a>
+        <a class="link" href="cadastro.html">Cadastro</a>
+        <a class="link" href="login.html">Login</a>
+    </nav>
+
+    <div class="container">
+        <div class="container-mensagem" id="c_chat">
+            <div class="mensagem">
+               Seja bem-vindo ao chat!
+            </div>
+        </div>
+
+        <div id="formulario" class="formulario">
+            <input id="input" type="text" placeholder="Escreva sua mensagem..." required/>
+            <button type="submit" id="btnEnviar">Enviar</button>
+        </div>
+    </div>
+
+    <footer>&copy; Desenvolvido pelo aluno Caio André - 2026 Curitiba</footer>
+
+    <script src="chat.js">
+        const logado='Caio André';
+
+        document.querySelector('#mensagem').textContent=`Olá ${logado}, seja bem vindo`
+        const input=document.querySelector('#input')
+        const btnEnviar=document.querySelector('#btnEnviar')
+        const c_chat=document.querySelector('#c_chat')
+
+        const historicoConversa=[]
+
+        function mensagemTela(autor, texto){
+
+            const textoFinal=document.createElement('p')
+            textoFinal.className='msg'
+            textoFinal.textContent=`${autor}, ${texto}`
+            c_chat.appendChild(textoFinal)
+        }
+
+        btnEnviar.addEventListener('click', async()=>{
+            const textoMensagem=input.value.trim()
+
+            if (!textoMensagem)return
+
+            mensagemTela(logado, textoMensagem)
+            historicoConversa.push({role:"user", content:textoMensagem})
+
+            input.value=''
+            btnEnviar.disable=true
+
+            try{
+                const respostaServidor= await fecth('/chat', {
+                    method:POST,
+                    headers:{ 'Content-Type': 'application/json' },
+                    body:JSON.stringify({historico:historicoConversa})
+                })
+
+                const dados= await respostaServidor.json()
+
+                if(respostaServidor.ok)
+                mensagemTela('system',dados.erro)
+                return
+
+                mensagemTela('darth vader',dados.resposta)
+
+            }
+            catch(erro){
+                mensagemTela('Sistema','Erro ao conectar')
+            }
+
+            finally{
+                btnEnviar.disable=false
+            }
+        } )
+
+    </script>
+</body>
+</html>

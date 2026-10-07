@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+   --fundo-cinema:  #0b0b0d; /* escuro estilo cinema */
+
+    --fundo-card: #1e1e24; /*Cinza escuro geek */
+
+    --amarelo-starwars: #ffe81f; /* laranja padrão de quadrinhos */
+
+    --brilho: #01afff; /* para mudar de cor  */
+    
+    --red: #da1010; /* vermelho para destaque */
+
+    --branco-gelo: #E8E8E8;
+
+}
+
+body{
+    background-image: url("espaço3.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    overflow-y: hidden;
+}
+
+.menu{
+    position: sticky;
+    top: 1px;
+    padding: 20px; 
+    text-align: center;
+    z-index: 100;
+    opacity: 0.8;
+}
+
+.link{
+    color: var(--amarelo-starwars);
+    text-decoration: none;
+    font-family: 'bangers';
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin: 0 20px;
+    text-shadow: 0 0 8px var(--red);
+    transition: .5s;
+}
+
+.link:hover{
+    color: var(--red)
+}
+
+
+.sith-vader{
+    position: relative;
+    height: 100vh;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.esquerdo{
+    max-width: 350px;
+    width: 350px;
+    max-height: 400px;
+    padding: 40px;
+    text-align: center;
+    margin-top: 80px;
+}
+
+.direito{
+    max-width: 350px;
+    width: 350px;
+    max-height: 400px;
+    padding: 40px;
+    text-align: center;
+    margin-top: 20px;
+
+}
+
+
+.titulo2{
+    font-family: "Bangers";
+    font-size: 3.6rem;
+    letter-spacing: 8px;
+    padding: 5px;
+
+    transform: skewY(-25deg);
+
+    background: linear-gradient(
+        90deg,
+        var(--amarelo-starwars) 0%,
+        var(--red) 50%,
+        var(--amarelo-starwars) 100%
+    );
+
+    background-size: 250%;
+
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+
+    animation: brilho 5s linear infinite;
+}
+
+.subtitulo{
+    font-family: "roboto";
+    font-size: 1.5rem;
+    padding: 15px;
+    transform: skewY(-25deg);
+    text-align: justify;
+
+    background: linear-gradient(
+        90deg,
+        #ffe81f 0%,
+        #df1717 50%,
+        #ffe81f 100%
+    );
+
+    background-size: 250%;
+
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+
+    animation: brilho 5s linear infinite;
+}
+
+@keyframes brilho{
+
+    from{
+        background-position: 200%;
+    }
+
+    to{
+        background-position: -200%;
+    }
+
+}
+
+.meio{
+    position: absolute;
+    width: 700px;
+    height: 100%;
+    left: 40%;
+    transform: translateX(-35%);
+    filter: drop-shadow(0 0 10px rgba(255,0,0,.7));
+}
+
+
+
+.balao{
+    font-family: "roboto";
+    background: var(--fundo-cinema);
+    color: var(--amarelo-starwars);
+    text-shadow: 0 0 8px var(--red);
+    border: 2px solid #b30000;
+    border-radius: 60px;
+    box-shadow: 0 0 15px rgba(255,0,0,.3);
+    padding: 30px;
+    margin-top: 60px;
+    transition: 1s;
+}
+
+.balao:hover{
+    filter: drop-shadow(10px 10px 30px rgba(255,0,0,.3));
+}
+
+.btn{
+    color: var(--red);
+    background-color: var(--fundo-cinema);
+    font-family: "bangers";
+    font-size: 1.5rem;
+    border: solid 1px red;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 200px;
+    cursor: pointer;
+    transition: transform .5s ;
+}
+
+.btn:hover{
+    background: #d90429;
+    color: var(--fundo-cinema);
+    box-shadow: 0 0 20px rgba(255,0,0,.7);
+    transform: translateY(-15px);
+}

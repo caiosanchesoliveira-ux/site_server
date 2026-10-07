@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+
+    <nav class="menu">
+        <a class="link" href="index.html">Home</a>
+        <a class="link" href="card.html">Cards</a>
+        <a class="link" href="chat.html">Chat</a>
+        <a class="link" href="cadastro.html">Cadastro</a>
+        <a class="link" href="login.html">Login</a>
+    </nav>
+
+    <div class="cadastro-container">
+
+        <h1>Cadastro</h1>
+
+        <label for="usuario">Nome do usuário</label><br>
+        <input type="text" id="usuario" placeholder="Digite seu nome"><br><br>
+
+        <label for="email">E-mail</label><br>
+        <input type="email" id="email" placeholder="Digite seu e-mail"><br><br>
+
+        <label for="senha">Senha</label><br>
+        <input type="password" id="senha" placeholder="A senha deve conter 6 caracteres"><br><br>
+
+        <button onclick="validarDados()">Enviar</button>
+
+        <div id="resposta"></div>
+
+    </div>
+
+    <footer>&copy; Desenvolvido pelo aluno Caio André - 2026 Curitiba</footer>
+
+    <script>
+        async function validarDados() {
+            const usuarioEntrada = document.querySelector('#usuario');
+            const emailEntrada = document.querySelector('#email');
+            const senhaEntrada = document.querySelector('#senha')
+            const resposta = document.querySelector('#resposta');
+           
+            const usuarioDigitado = usuarioEntrada.value;
+            const emailDigitado = emailEntrada.value;
+            const senhaDigitada = senhaEntrada.value;
+           
+            if (!usuarioDigitado || !emailDigitado || !senhaDigitada) {
+                resposta.innerText = 'Preencha todos os campos antes de enviar!';
+                resposta.style.color = 'red';
+                return;
+            }
+
+            resposta.innerText = 'Aguarde 10 segundos, cadastrando no servidor...';
+            resposta.style.color = 'orange';
+         
+            try {
+                const respostaBe = await fetch('http://localhost:3000/cadastro', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        usuario: usuarioDigitado,
+                        email: emailDigitado,
+                        senha: senhaDigitada
+                    })
+                });
+
+                const dados = await respostaBe.json();
+               
+                if (!respostaBe.ok) {
+                    resposta.innerText = `${dados.erro}`;
+                    resposta.style.color = 'red';
+                    return;
+                }
+
+                resposta.innerText = `${dados.mensagem}: ${dados.PERFIL}`;
+                resposta.style.color = 'green';
+
+                usuarioEntrada.value = '';
+                emailEntrada.value = '';
+                senhaEntrada.value = '';
+
+            } catch (erro) {
+                console.error('Erro na requisição:', erro);
+                resposta.innerText = 'Erro ao conectar com o servidor!!';
+                resposta.style.color = 'red';
+
+                usuarioEntrada.value = '';
+                emailEntrada.value = '';
+                senhaEntrada.value = '';
+            }
+        }
+    </script>
+</body>
+</html>

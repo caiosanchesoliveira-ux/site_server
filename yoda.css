@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Orbitron&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --verde-sabre: #49ff6d;
+    --verde-yoda: #2a9d46;
+    --marrom-cabana: #4e4637;
+    --linho-velho: #8b8065;
+    --pantano-profundo: #0d1310;
+    --nevoa-noturna: #19241e;
+    --branco-acinzentado: #e2ece9;
+    --verde-musgo-claro: #a2b3ad;
+}
+
+body{
+    background-image: 
+        linear-gradient(
+            to right,
+            rgba(0,0,0,0.9) 0%,
+            rgba(0,0,0,0.1) 40%,
+            rgba(0,0,0,0.1) 90%
+        ),
+        url("casa-yoda.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    position: relative;
+    margin: 0;
+
+}
+
+.personagem{
+    position: absolute;
+    max-height: 72vh;
+    right: 250px;
+    bottom: 0;
+    filter: brightness(0.6) saturate(0.6);
+    transform: scaleX(-1);
+    transition: transform 0.3s, filter 0.3s ease;
+}
+
+.personagem:hover{
+    transform: scaleX(-1);
+    filter: brightness(1.1) saturate(1.1);
+}
+
+.menu{
+    position: sticky;
+    top: 0;
+    padding: 20px; 
+    text-align: center;
+    z-index: 100;
+    opacity: 0.7;
+    transition: .3s;
+}
+
+.menu:hover{
+    opacity: 1;
+}
+
+
+.link{
+    color: var(--verde-musgo-claro);
+    text-decoration: none;
+    font-family: "Cinzel";
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin: 0 20px;
+    transition: .3s;
+}
+
+.link:hover{
+    color: var(--verde-sabre);  
+    text-shadow: 0px 0px 10px var(--verde-sabre);
+}
+
+.container{
+    max-width: 415px;
+    width: 90%;
+    height: auto;
+    margin-top: 40px;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: "Cinzel";  
+    color: var(--verde-yoda)
+}
+
+.paragrafo{
+    color: var(--verde-musgo-claro);
+    text-align: justify;
+}
+
+.titulo{
+    color: var(--verde-sabre)
+}
+
+ul{
+    color: var(--verde-musgo-claro);
+}

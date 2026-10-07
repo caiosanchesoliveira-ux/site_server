@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --fundo-cinema: #0b0b0d;
+    --fundo-card: #1e1e24;
+    --amarelo-starwars: #ffe81f;
+    --brilho: #01afff;
+    --red: #da1010;
+}
+
+body {
+    min-height: 100vh;
+    background-image: url("espaço3.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Roboto', sans-serif;
+}
+
+.menu {
+    position: sticky;
+    top: 0;
+    padding: 12px;
+    text-align: center;
+    z-index: 100;
+    opacity: 0.8;
+}
+
+.link {
+    color: var(--amarelo-starwars);
+    text-decoration: none;
+    font-family: 'Bangers', cursive;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin: 0 20px;
+    transition: .5s;
+}
+
+.link:hover {
+    color: var(--red);
+    text-shadow: 0 0 5px var(--red);
+}
+
+.cadastro-container {
+    width: 600px;
+    margin: 15px auto 8px ;
+    padding: 15px 25px;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: var(--fundo-cinema);
+
+    border-radius: 11px;
+    border: 3px solid var(--red);
+}
+
+.cadastro-container h1 {
+    color: var(--amarelo-starwars);
+    text-align: center;
+
+    font-family: 'Bangers', cursive;
+    font-size: 2.3rem;
+    letter-spacing: 3px;
+
+    margin-bottom: 10px;
+}
+
+.cadastro-container label {
+    color: var(--amarelo-starwars);
+
+    font-family: 'Bangers', cursive;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+
+    margin-bottom: 3px;
+}
+
+.cadastro-container input {
+    width: 100%;
+    padding: 9px;
+
+    background-color: var(--fundo-card);
+
+    border: 1px solid var(--fundo-cinema);
+    border-radius: 8px;
+
+    color: white;
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+
+    outline: none;
+
+    margin-bottom: 7px;
+}
+
+.cadastro-container input::placeholder {
+    color: #aaa;
+}
+
+.cadastro-container input:focus {
+    border: 1px solid var(--red);
+    box-shadow: 0 0 8px rgba(218, 16, 16, 0.5);
+}
+
+.cadastro-container button {
+    width: 100%;
+
+    padding: 9px;
+
+    margin-top: 2px;
+
+    background-color: var(--red);
+
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.cadastro-container button:hover {
+    background-color: var(--fundo-cinema);
+
+    filter: drop-shadow(0 0 10px var(--red));
+
+    border: 1px solid var(--red);
+}
+
+#resposta {
+    margin-top: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    color: var(--amarelo-starwars);
+}

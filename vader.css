@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Orbitron&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --vermelho-sith: #ff1a1a;
+    --laranja-magma: #e64a19;
+    --preto-armadura: #0a0a0c;
+    --metal-queimado: #1a191d;
+    --poeira-cinzas: #c5c1c8;
+    --fumaca-escura: #575559;
+}
+
+body{
+    background-image: 
+        linear-gradient(
+            to right,
+            rgba(0,0,0,0.9) 0%,
+            rgba(0,0,0,0.1) 40%,
+            rgba(0,0,0,0.1) 90%
+        ),
+        url("mustafa2.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+}
+
+.personagem{
+    position: absolute;
+    max-height: 72vh;
+    right: 350px;
+    bottom: 0px;
+    filter: brightness(0.6) saturate(0.8);
+    transition: filter 0.3s ease;
+}
+
+.personagem:hover{
+    filter: brightness(1.1) saturate(1.1);
+}
+
+.menu{
+    position: sticky;
+    top: 0;
+    padding: 20px; 
+    text-align: center;
+    z-index: 100;
+    opacity: 0.7;
+    transition: .3s;
+}
+
+.menu:hover{
+    opacity: 1;
+}
+
+
+.link{
+    color: var(--poeira-cinzas);
+    text-decoration: none;
+    font-family: "Cinzel";
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin: 0 20px;
+    transition: .3s;
+}
+
+.link:hover{
+    color: var(--vermelho-sith);  
+    text-shadow: 0px 0px 10px var(--vermelho-sith);
+}
+
+.container{
+    max-width: 415px;
+    width: 90%;
+    height: auto;
+    margin-top: 40px;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: "Cinzel";  
+    color: var(--laranja-magma)
+}
+
+.paragrafo{
+    color: var(--poeira-cinzas);
+    text-align: justify;
+}
+
+.titulo{
+    color: var(--vermelho-sith)
+}
+
+ul{
+    color: var(--poeira-cinzas)
+}
