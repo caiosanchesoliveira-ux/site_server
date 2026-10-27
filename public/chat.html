@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+    <nav class="menu">
+        <a class="link" href="index.html">Home</a>
+        <a class="link" href="card.html">Cards</a>
+        <a class="link" href="chat.html">Chat</a>
+        <a class="link" href="cadastro.html">Cadastro</a>
+        <a class="link" href="login.html">Login</a>
+    </nav>
+    
+    <div class="container">
+        <div class="container-mensagem" id="c_chat">
+            <div class="mensagem">Seja bem-vindo ao chat!</div>
+        </div>
+
+        <div id="formulario" class="formulario">
+            <input id="input" type="text" placeholder="Escreva sua mensagem..." required/>
+            <button type="submit" id="btnEnviar">Enviar</button>
+        </div>
+    </div>
+
+    <footer>&copy; Desenvolvido pelo aluno Caio André - 2026 Curitiba</footer>
+
+    <script>
+        const logado = 'Caio André';
+
+        document.querySelector('.mensagem').textContent = `Olá ${logado}, seja bem vindo`;
+
+        const input = document.querySelector('#input');
+        const btnEnviar = document.querySelector('#btnEnviar');
+        const c_chat = document.querySelector('#c_chat');
+        const historicoConversa = [];
+
+        function mensagemTela(autor, texto) {
+            const textoFinal = document.createElement('p');
+            textoFinal.className = 'msg';
+            
+            if (autor === logado) {
+                textoFinal.classList.add('usuario');
+            }
+            
+            textoFinal.textContent = `${autor}: ${texto}`;
+            c_chat.appendChild(textoFinal);
+            c_chat.scrollTop = c_chat.scrollHeight;
+        }
+
+        btnEnviar.addEventListener('click', async () => {
+            const textoMensagem = input.value.trim();
+            
+            if (!textoMensagem) return; 
+
+            mensagemTela(logado, textoMensagem);
+            historicoConversa.push({ role: "user", content: textoMensagem });
+            
+            input.value = '';
+            btnEnviar.disabled = true;
+
+            try {
+                const respostaServidor = await fetch('/chat', {
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ historico: historicoConversa })
+                });
+
+                const dados = await respostaServidor.json();
+
+                if (respostaServidor.ok) {
+                    mensagemTela('Darth Vader', dados.resposta);
+                    historicoConversa.push({ role: "assistant", content: dados.resposta });
+                } else {
+                    mensagemTela('System', dados.erro || 'Erro no servidor');
+                }
+            } catch (erro) {
+                mensagemTela('Sistema', 'Erro ao conectar ao servidor');
+            } finally {
+                btnEnviar.disabled = false;
+            }
+        });
+
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                btnEnviar.click();
+            }
+        });
+    </script>
+</body>
+</html>
