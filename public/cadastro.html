@@ -58,7 +58,7 @@
             resposta.style.color = 'orange';
          
             try {
-                const respostaBe = await fetch('http://localhost:3000/cadastro', {
+                const respostaBe = await fetch('/cadastro', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -76,8 +76,12 @@
                     return;
                 }
 
-                resposta.innerText = `${dados.mensagem}: ${dados.PERFIL}`;
+                resposta.innerText = `${dados.mensagem} Redirecionando para o login...`;
                 resposta.style.color = 'green';
+
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1500);
 
                 usuarioEntrada.value = '';
                 emailEntrada.value = '';

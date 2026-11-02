@@ -3,6 +3,7 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 :root {
@@ -32,11 +33,12 @@ body{
     min-height: 100vh;
     position: relative;
     margin: 0;
-
+    overflow-x: hidden;
 }
 
 .personagem{
     position: absolute;
+    max-width: 100%;
     max-height: 72vh;
     right: 250px;
     bottom: 0;
@@ -64,7 +66,6 @@ body{
     opacity: 1;
 }
 
-
 .link{
     color: var(--verde-musgo-claro);
     text-decoration: none;
@@ -73,6 +74,7 @@ body{
     letter-spacing: 2px;
     margin: 0 20px;
     transition: .3s;
+    display: inline-block;
 }
 
 .link:hover{
@@ -90,7 +92,7 @@ body{
     flex-direction: column;
     gap: 20px;
     font-family: "Cinzel";  
-    color: var(--verde-yoda)
+    color: var(--verde-yoda);
 }
 
 .paragrafo{
@@ -99,9 +101,71 @@ body{
 }
 
 .titulo{
-    color: var(--verde-sabre)
+    color: var(--verde-sabre);
 }
 
 ul{
     color: var(--verde-musgo-claro);
+    margin-left: 20px;
+}
+
+@media (max-width: 1100px) {
+    .personagem {
+        right: 40px;
+        max-height: 60vh;
+    }
+}
+
+@media (max-width: 850px) {
+    body {
+        background-image: 
+            linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.9) 0%,
+                rgba(0,0,0,0.7) 100%
+            ),
+            url("casa-yoda.jpg");
+        display: flex;
+        flex-direction: column;
+    }
+
+    .menu {
+        padding: 15px;
+    }
+
+    .link {
+        font-size: 1.3rem;
+        margin: 5px 10px;
+    }
+
+    .container {
+        margin: 30px auto;
+        max-width: 90%;
+        text-align: center;
+    }
+
+    .paragrafo {
+        text-align: center;
+    }
+
+    ul {
+        text-align: left;
+        display: inline-block;
+        margin: 0 auto;
+    }
+
+    .personagem {
+        position: relative;
+        display: block;
+        margin: 30px auto 0;
+        right: auto;
+        bottom: auto;
+        max-height: 45vh;
+        left: auto;
+        transform: scaleX(-1);
+    }
+
+    .personagem:hover {
+        transform: scaleX(-1);
+    }
 }

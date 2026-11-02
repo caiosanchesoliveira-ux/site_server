@@ -3,6 +3,7 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 :root {
@@ -30,7 +31,7 @@ body{
     min-height: 100vh;
     position: relative;
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .personagem{
@@ -60,7 +61,6 @@ body{
     opacity: 1;
 }
 
-
 .link{
     color: var(--poeira-cinzas);
     text-decoration: none;
@@ -69,6 +69,7 @@ body{
     letter-spacing: 2px;
     margin: 0 20px;
     transition: .3s;
+    display: inline-block;
 }
 
 .link:hover{
@@ -86,7 +87,7 @@ body{
     flex-direction: column;
     gap: 20px;
     font-family: "Cinzel";  
-    color: var(--laranja-magma)
+    color: var(--laranja-magma);
 }
 
 .paragrafo{
@@ -95,9 +96,68 @@ body{
 }
 
 .titulo{
-    color: var(--vermelho-sith)
+    color: var(--vermelho-sith);
 }
 
 ul{
-    color: var(--poeira-cinzas)
+    color: var(--poeira-cinzas);
+    margin-left: 20px;
+}
+
+@media (max-width: 1200px) {
+    .personagem {
+        right: 40px;
+        max-height: 60vh;
+    }
+}
+
+@media (max-width: 850px) {
+    body {
+        background-image: 
+            linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.9) 0%,
+                rgba(0,0,0,0.7) 100%
+            ),
+            url("mustafa2.jpg");
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+    }
+
+    .menu {
+        padding: 15px;
+    }
+
+    .link {
+        font-size: 1.3rem;
+        margin: 5px 10px;
+    }
+
+    .container {
+        margin: 30px auto;
+        max-width: 90%;
+        text-align: center;
+    }
+
+    .paragrafo {
+        text-align: center;
+    }
+
+    ul {
+        text-align: left;
+        display: inline-block;
+        margin: 0 auto;
+    }
+
+    .personagem {
+        position: relative;
+        display: block;
+        margin: 30px auto 0;
+        right: auto;
+        bottom: auto;
+        max-height: 45vh;
+        left: auto;
+        transform: none;
+    }
 }

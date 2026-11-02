@@ -1,20 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Orbitron&display=swap');
 
+
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 :root{
     --texto-claro: #ECEFF1;
-
     --areia-vestes: #D7CCC8;
-
-     --brilho-sabre: #FFF59D;
-
-     --ouro-jedi: #E5C158;
-
-      --cinza-metal: #2B3036;
+    --brilho-sabre: #FFF59D;
+    --ouro-jedi: #E5C158;
+    --cinza-metal: #2B3036;
 }
 
 body{
@@ -27,20 +25,13 @@ body{
         ),
         url("estrela-morte.webp");
 
-    background-size: 
-        cover,
-        cover;
-    
-    background-position: 
-        center,
-        center;
-        
+    background-size: cover, cover;
+    background-position: center, center;
     background-repeat: no-repeat;
     min-height: 100vh;
     position: relative;
     margin: 0;
-
-
+    overflow-x: hidden;
 }
 
 .personagem{
@@ -55,7 +46,7 @@ body{
 
 .personagem:hover{
     filter: brightness(1.1);
-    transform: scaleX(-1)
+    transform: scaleX(-1);
 }
 
 .menu{
@@ -72,7 +63,6 @@ body{
     opacity: 1;
 }
 
-
 .link{
     color: var(--areia-vestes);
     text-decoration: none;
@@ -81,6 +71,7 @@ body{
     letter-spacing: 2px;
     margin: 0 20px;
     transition: .3s;
+    display: inline-block;
 }
 
 .link:hover{
@@ -98,7 +89,7 @@ body{
     flex-direction: column;
     gap: 20px;
     font-family: "Cinzel";  
-    color: var(--ouro-jedi)
+    color: var(--ouro-jedi);
 }
 
 .paragrafo{
@@ -106,13 +97,71 @@ body{
     text-align: justify;
 }
 
-
-
 .titulo{
-    color: var(--brilho-sabre)
+    color: var(--brilho-sabre);
 }
 
 .lista{
     color: var(--areia-vestes);
-    margin: auto
+    margin: 0 0 0 20px;
+}
+
+@media (max-width: 1024px) {
+    .personagem {
+        right: 5%;
+        max-height: 60vh;
+    }
+}
+
+@media (max-width: 850px) {
+    body {
+        background-image: 
+            linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.9) 0%,
+                rgba(0,0,0,0.7) 100%
+            ),
+            url("estrela-morte.webp");
+        display: flex;
+        flex-direction: column;
+    }
+
+    .menu {
+        padding: 15px;
+    }
+
+    .link {
+        font-size: 1.3rem;
+        margin: 5px 10px;
+    }
+
+    .container {
+        margin: 30px auto;
+        max-width: 90%;
+        text-align: center;
+    }
+
+    .paragrafo {
+        text-align: center;
+    }
+
+    .lista {
+        text-align: left;
+        display: inline-block;
+        margin: 0 auto;
+    }
+
+    .personagem {
+        position: relative;
+        display: block;
+        margin: 30px auto 0;
+        right: auto;
+        bottom: auto;
+        max-height: 45vh;
+        transform: none;
+    }
+    
+    .personagem:hover {
+        transform: none;
+    }
 }

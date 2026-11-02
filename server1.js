@@ -3,6 +3,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { randomBytes } from 'crypto';
 
 const app = express();
 
@@ -19,6 +20,46 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
 const user = [];
+const sessoes = new Map();
+
+function obterSessao(req) {
+    const cookies = req.headers.cookie || '';
+
+    const cookieSessao = cookies
+        .split('; ')
+        .find(cookie => cookie.startsWith('sessao='));
+
+    if (!cookieSessao) return null;
+
+    const token = cookieSessao.split('=')[1];
+
+    return sessoes.get(token) || null;
+}
+
+function autenticar(req, res, next) {
+    const sessao = obterSessao(req);
+
+    if (!sessao) {
+        return res.status(401).json({
+            erro: 'Você precisa fazer login para acessar o chat.'
+        });
+    }
+
+    req.usuarioLogado = sessao;
+    next();
+}
+
+
+app.get('/chat.html', (req, res) => {
+    const sessao = obterSessao(req);
+
+    if (!sessao) {
+        return res.redirect('/login.html?aviso=1');
+    }
+
+    return res.sendFile(path.join(__dirname, 'public', 'chat.html'));
+});
+
 
 app.post('/cadastro', (req, res) => {
     const { usuario, email, senha } = req.body;
@@ -36,7 +77,7 @@ app.post('/cadastro', (req, res) => {
     }
 
     const emailExiste = user.find(
-        (busca) => busca.email.toLowerCase() === email.toLowerCase()
+        busca => busca.email.toLowerCase() === email.toLowerCase()
     );
 
     if (emailExiste) {
@@ -45,19 +86,20 @@ app.post('/cadastro', (req, res) => {
         });
     }
 
-    console.log("Recebido, aguarde 4 segundos");
+    user.push({
+        usuario: usuario.trim(),
+        email: email.trim().toLowerCase(),
+        senha
+    });
 
-    user.push({ usuario, email, senha });
+    console.log(`O usuário cadastrado foi ${usuario}`);
 
-    setTimeout(() => {
-        res.json({
-            mensagem: "CADASTRO COM SUCESSO",
-            PERFIL: `Usuário @${usuario} cadastrado com o email ${email}`
-        });
-
-        console.log(`O usuário cadastrado foi ${usuario}`);
-    }, 4000);
+    return res.json({
+        mensagem: "Cadastro realizado com sucesso!",
+        usuario: usuario.trim()
+    });
 });
+
 
 app.post('/login', (req, res) => {
     const { email, senha } = req.body;
@@ -69,14 +111,29 @@ app.post('/login', (req, res) => {
     }
 
     const usuarioExiste = user.find(
-        (busca) => busca.email.toLowerCase() === email.toLowerCase()
+        busca => busca.email === email.trim().toLowerCase()
     );
 
     if (!usuarioExiste || usuarioExiste.senha !== senha) {
-        return res.status(400).json({
+        return res.status(401).json({
             erro: "Usuário ou senha incorretos!"
         });
     }
+
+    const token = randomBytes(32).toString('hex');
+
+    sessoes.set(token, {
+        usuario: usuarioExiste.usuario,
+        email: usuarioExiste.email
+    });
+
+    res.cookie('sessao', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 24 * 60 * 60 * 1000,
+        path: '/'
+    });
 
     return res.json({
         mensagem: "Login realizado com sucesso!",
@@ -84,13 +141,46 @@ app.post('/login', (req, res) => {
     });
 });
 
-app.post('/chat', async (req, res) => {
+
+app.get('/me', autenticar, (req, res) => {
+    res.json({
+        usuario: req.usuarioLogado.usuario
+    });
+});
+
+
+app.post('/logout', (req, res) => {
+    const cookies = req.headers.cookie || '';
+
+    const cookieSessao = cookies
+        .split('; ')
+        .find(cookie => cookie.startsWith('sessao='));
+
+    if (cookieSessao) {
+        const token = cookieSessao.split('=')[1];
+        sessoes.delete(token);
+    }
+
+    res.clearCookie('sessao', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        path: '/'
+    });
+
+    res.json({
+        mensagem: 'Você saiu da sua conta.'
+    });
+});
+
+
+app.post('/chat', autenticar, async (req, res) => {
     try {
         const API_KEY = process.env.GROQ_API_KEY;
         const historico = req.body.historico;
 
         if (!API_KEY) {
-            console.log("Erro: GROQ_API_KEY não está definida nas variáveis de ambiente.");
+            console.log("Erro: GROQ_API_KEY não está definida.");
 
             return res.status(500).json({
                 erro: "Chave de API ausente no servidor"
@@ -125,7 +215,6 @@ app.post('/chat', async (req, res) => {
 
         if (!respostaBruta.ok) {
             const erroTexto = await respostaBruta.text();
-
             console.log("Erro retornado pela Groq:", erroTexto);
 
             return res.status(500).json({

@@ -42,6 +42,7 @@ body {
     letter-spacing: 2px;
     margin: 0 20px;
     transition: .5s;
+    display: inline-block; 
 }
 
 .link:hover {
@@ -50,7 +51,10 @@ body {
 }
 
 .cadastro-container {
-    width: 600px;
+    /* AJUSTE DE RESPONSIVIDADE */
+    width: 90%; 
+    max-width: 600px; 
+    
     margin: 15px auto 8px ;
     padding: 15px 25px;
 
@@ -152,4 +156,25 @@ body {
 footer {
     text-align: center;
     color: var(--amarelo-starwars);
+    padding: 10px;
+}
+
+@media (max-width: 600px) {
+    .menu {
+        padding: 8px;
+    }
+
+    .link {
+        font-size: 1.4rem;
+        margin: 5px 10px;
+    }
+
+    .cadastro-container {
+        padding: 15px 15px; 
+        margin-top: 10px;
+    }
+
+    .cadastro-container h1 {
+        font-size: 1.8rem;
+    }
 }

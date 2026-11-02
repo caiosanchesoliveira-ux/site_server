@@ -3,57 +3,53 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 :root{
     --verde-sabre: #39FF14;
-
     --texto: #ECEFF1;
-
     --amarelo-titulo: #FFE81F;
-
     --cinza-nave: #90A4AE; 
 }
 
-body{
-    background-image: 
+body {
+    background-image:
         linear-gradient(
             to right,
-            rgba(0,0,0) 0%,
-            rgba(0,0,0,0.6) 40%,
-            rgba(0,0,0,0.1) 100%
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0.6) 40%,
+            rgba(0, 0, 0, 0.1) 100%
         ),
-        linear-gradient(
-            rgba(0, 0, 0, 0.2), 
-            rgba(0, 0, 0, 0.2)
-        ),
-
-        url("Luke_Skywalker-png.webp"),
         url("floresta.jpg");
-        
 
-    background-size: 
-       100% 100%,  
-        100% 100%,
-        auto  82vh,
-        cover;
-
-    background-position: 
-        center center,
-        center center,
-        right +180px bottom -5px,
-        center center;
-
+    background-size: 100% 100%, cover;
+    background-position: center, center;
     background-repeat: no-repeat;
+    background-color: #000;
     min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.personagem {
+    position: absolute;
+    height: 82vh;
+    max-width: 55%;
+    width: auto;
+    object-fit: contain;
+    right: 180px;
+    bottom: 0;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .menu{
-    position: sticky;
+    position: relative;
     top: 0;
     padding: 20px; 
     text-align: center;
-    z-index: 100;
+    z-index: 2;
     opacity: 0.5;
     transition: .3s;
 }
@@ -61,7 +57,6 @@ body{
 .menu:hover{
     opacity: 1;
 }
-
 
 .link{
     color: var(--cinza-nave);
@@ -71,6 +66,7 @@ body{
     letter-spacing: 2px;
     margin: 0 20px;
     transition: .3s;
+    display: inline-block;
 }
 
 .link:hover{
@@ -88,7 +84,10 @@ body{
     flex-direction: column;
     gap: 20px;
     font-family: "Cinzel";  
-    color: var(--verde-sabre)
+    color: var(--verde-sabre);
+
+    position: relative;
+    z-index: 2;
 }
 
 .paragrafo{
@@ -97,10 +96,75 @@ body{
 }
 
 .titulo{
-    color: var(--texto)
+    color: var(--texto);
 }
 
 .lista{
     color: var(--cinza-nave);
-    margin: auto
+    margin: 0 0 0 20px;
+}
+
+@media (max-width: 1024px) {
+    body {
+        background-position: 
+            center center,
+            center center,
+            right -50px bottom -5px,
+            center center;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        background-image:
+         linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.5) 100%
+    ),
+    url("floresta.jpg");
+
+        min-height: 100vh;
+        background-attachment: scroll;
+    }
+
+    .personagem {
+    height: auto;
+    width: auto;
+    max-width: 85%;
+    max-height: 45vh;
+    right: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    }
+
+    .menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .link {
+        font-size: clamp(1rem, 4vw, 1.3rem);
+        margin: 5px;
+    }
+
+    .container {
+        width: min(90%, 415px);
+        margin: 30px auto;
+        padding-bottom: 35vh;
+        text-align: center;
+    }
+
+    .paragrafo {
+        text-align: center;
+    }
+
+    .lista {
+        text-align: left;
+        display: inline-block;
+        margin: 0 auto;
+    }
 }

@@ -1,97 +1,100 @@
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 
-
-*{
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-:root{
-   --fundo-cinema:  #0b0b0d; /* escuro estilo cinema */
-
-    --fundo-card: #1e1e24; /*Cinza escuro geek */
-
-    --amarelo-starwars: #ffe81f; /* laranja padrão de quadrinhos */
-
-    --brilho: #01afff; /* para mudar de cor  */
-    
-    --red: #da1010; /* vermelho para destaque */
-
+:root {
+    --fundo-cinema: #0b0b0d;
+    --fundo-card: #1e1e24;
+    --amarelo-starwars: #ffe81f;
+    --brilho: #01afff;
+    --red: #da1010;
     --branco-gelo: #E8E8E8;
 
 }
 
-body{
+body {
+    min-height: 100vh;
     background-image: url("espaço3.jpg");
     background-attachment: fixed;
     background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
-
-    overflow-y: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
-.menu{
+.menu {
     position: sticky;
-    top: 1px;
-    padding: 20px; 
+    top: 0;
+    padding: 20px 12px;
     text-align: center;
     z-index: 100;
-    opacity: 0.8;
+    background: rgba(11, 11, 13, 0.75);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 28px;
 }
 
-.link{
+.link {
     color: var(--amarelo-starwars);
     text-decoration: none;
-    font-family: 'bangers';
+    font-family: 'Bangers', sans-serif;
     font-size: 1.8rem;
     letter-spacing: 2px;
-    margin: 0 20px;
+
     text-shadow: 0 0 8px var(--red);
-    transition: .5s;
+    transition: color 0.3s, transform 0.3s;
 }
 
-.link:hover{
-    color: var(--red)
+.link:hover {
+    color: var(--red);
+    transform: translateY(-2px);
 }
 
-
-.sith-vader{
+.sith-vader {
     position: relative;
-    height: 100vh;
-
+    min-height: calc(100vh - 75px);
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
 }
 
-.esquerdo{
-    max-width: 350px;
+.esquerdo,
+.direito {
+    position: relative;
+    z-index: 2;
     width: 350px;
-    max-height: 400px;
-    padding: 40px;
+    max-width: 30%;
+    padding: 30px;
     text-align: center;
-    margin-top: 80px;
 }
 
-.direito{
-    max-width: 350px;
-    width: 350px;
-    max-height: 400px;
-    padding: 40px;
-    text-align: center;
+.esquerdo {
+    margin-top: 60px;
+}
+
+.direito {
     margin-top: 20px;
-
 }
 
-
-.titulo2{
-    font-family: "Bangers";
-    font-size: 3.6rem;
-    letter-spacing: 8px;
+.titulo2 {
+    font-family: "Bangers", sans-serif;
+    font-size: clamp(2.2rem, 3.6vw, 3.6rem);
+    letter-spacing: 5px;
     padding: 5px;
 
-    transform: skewY(-25deg);
+    transform: skewY(-15deg);
 
     background: linear-gradient(
         90deg,
@@ -111,11 +114,12 @@ body{
     animation: brilho 5s linear infinite;
 }
 
-.subtitulo{
-    font-family: "roboto";
-    font-size: 1.5rem;
+.subtitulo {
+    font-family: "Roboto", sans-serif;
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    line-height: 1.6;
     padding: 15px;
-    transform: skewY(-25deg);
+    transform: skewY(-10deg);
     text-align: justify;
 
     background: linear-gradient(
@@ -126,72 +130,214 @@ body{
     );
 
     background-size: 250%;
-
     background-clip: text;
     -webkit-background-clip: text;
-
     color: transparent;
     -webkit-text-fill-color: transparent;
 
     animation: brilho 5s linear infinite;
 }
 
-@keyframes brilho{
-
-    from{
+@keyframes brilho {
+    from {
         background-position: 200%;
     }
 
-    to{
+    to {
         background-position: -200%;
     }
-
 }
 
-.meio{
+.meio {
     position: absolute;
-    width: 700px;
+    width: min(55vw, 700px);
     height: 100%;
-    left: 40%;
-    transform: translateX(-35%);
-    filter: drop-shadow(0 0 10px rgba(255,0,0,.7));
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    object-fit: contain;
+    object-position: center bottom;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.7));
+    pointer-events: none;
 }
 
-
-
-.balao{
-    font-family: "roboto";
-    background: var(--fundo-cinema);
+.balao {
+    font-family: "Roboto", sans-serif;
+    line-height: 1.6;
+    background: rgba(11, 11, 13, 0.9);
     color: var(--amarelo-starwars);
     text-shadow: 0 0 8px var(--red);
     border: 2px solid #b30000;
-    border-radius: 60px;
-    box-shadow: 0 0 15px rgba(255,0,0,.3);
-    padding: 30px;
-    margin-top: 60px;
-    transition: 1s;
+    border-radius: 30px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+    padding: 25px;
+    margin-top: 40px;
+    transition: box-shadow 0.4s;
 }
 
-.balao:hover{
-    filter: drop-shadow(10px 10px 30px rgba(255,0,0,.3));
+.balao:hover {
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
 }
 
-.btn{
+.btn {
     color: var(--red);
     background-color: var(--fundo-cinema);
-    font-family: "bangers";
+    font-family: "Bangers", sans-serif;
     font-size: 1.5rem;
-    border: solid 1px red;
+    border: solid 1px var(--red);
     border-radius: 15px;
-    padding: 20px;
-    margin-top: 200px;
+    padding: 15px 25px;
+    margin-top: 50px;
     cursor: pointer;
-    transition: transform .5s ;
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
 }
 
-.btn:hover{
+.btn:hover {
     background: #d90429;
     color: var(--fundo-cinema);
-    box-shadow: 0 0 20px rgba(255,0,0,.7);
-    transform: translateY(-15px);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+    transform: translateY(-5px);
+}
+
+@media (max-width: 1000px) {
+    .sith-vader {
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .esquerdo,
+    .direito {
+        width: 32%;
+        max-width: 32%;
+        padding: 15px;
+    }
+
+    .meio {
+        width: 50vw;
+    }
+
+    .titulo2 {
+        letter-spacing: 3px;
+    }
+
+    .subtitulo {
+        padding: 10px 5px;
+    }
+
+    .balao {
+        padding: 18px;
+    }
+
+    .btn {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 700px) {
+    body {
+        background-attachment: scroll;
+    }
+
+    .menu {
+        gap: 12px 20px;
+        padding: 15px 10px;
+    }
+
+    .link {
+        font-size: 1.4rem;
+        letter-spacing: 1px;
+    }
+
+    .sith-vader {
+        min-height: auto;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 20px;
+        padding: 20px 15px 40px;
+    }
+
+    .esquerdo,
+    .direito {
+        width: 100%;
+        max-width: 480px;
+        padding: 15px;
+        margin-top: 0;
+    }
+
+    .esquerdo {
+        order: 1;
+    }
+
+    .meio {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        order: 2;
+        width: 100%;
+        max-width: 420px;
+        height: auto;
+        max-height: 55vh;
+        object-fit: contain;
+        align-self: center;
+    }
+
+    .direito {
+        order: 3;
+    }
+
+    .titulo2 {
+        font-size: clamp(2rem, 9vw, 3rem);
+        letter-spacing: 3px;
+        transform: skewY(-8deg);
+    }
+
+    .subtitulo {
+        font-size: 1rem;
+        line-height: 1.6;
+        text-align: center;
+        transform: none;
+        padding: 12px 5px;
+    }
+
+    .balao {
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 22px;
+    }
+
+    .btn {
+        font-size: 1.3rem;
+        padding: 13px 22px;
+        margin-top: 25px;
+    }
+}
+
+@media (max-width: 400px) {
+    .menu {
+        gap: 10px 15px;
+    }
+
+    .link {
+        font-size: 1.2rem;
+    }
+
+    .sith-vader {
+        padding: 15px 10px 30px;
+    }
+
+    .esquerdo,
+    .direito {
+        padding: 10px;
+    }
+
+    .titulo2 {
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+
+    .balao {
+        padding: 15px;
+    }
 }

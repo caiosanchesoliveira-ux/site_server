@@ -28,6 +28,8 @@
     <label for="loginSenha">Senha</label><br>
     <input type="password" id="loginSenha" placeholder="Digite sua senha"><br><br>
 
+    <p>Não tem conta? <a href="cadastro.html">Cadastro</a></p>
+
     <button id="btnLogin" class="card">Enviar</button>
     <div id="loginMensagem" class="mensagem"></div>
 
@@ -37,7 +39,13 @@
     <script>
 
         const btnLogin = document.querySelector('#btnLogin')
-        const btnMensagem = document.querySelector('#loginMensagem')
+        const loginMensagem = document.querySelector('#loginMensagem')
+
+        const parametros = new URLSearchParams(window.location.search);
+
+        if (parametros.get('aviso') === '1') {
+            alert('Necessário fazer login para acessar o chat!');
+        }
 
         btnLogin.addEventListener('click', async () => {
             const emailEntrada = document.querySelector('#loginEmail');
@@ -53,7 +61,7 @@
             }
 
             try {
-                const respostaBe = await fetch('http://localhost:3000/login', {
+                const respostaBe = await fetch('/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -70,17 +78,24 @@
                     return;
                 }
 
-                loginMensagem.innerText = `${dados.mensagem}: ${dados.usuario} entrando no chat...`;
+                loginMensagem.innerText = `${dados.mensagem} Bem-vindo, ${dados.usuario}!`;
                 loginMensagem.style.color = 'green';
 
                 emailEntrada.value = '';
                 senhaEntrada.value = '';
+
+                setTimeout(() => {
+                    window.location.href = 'chat.html';
+                }, 1000);
+
+                
 
             } catch (erro) {
                 console.error('Erro na requisição:', erro);
                 loginMensagem.innerText = 'Erro ao conectar com o servidor!!';
                 loginMensagem.style.color = 'red';
             }
+
         })
 
 
